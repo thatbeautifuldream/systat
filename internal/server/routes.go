@@ -17,11 +17,21 @@ func (s *FiberServer) RegisterFiberRoutes() {
 
 	s.App.Get("/", s.HelloWorldHandler)
 
+	s.App.Get("/health", s.HealthCheckHandler)
+
 }
 
 func (s *FiberServer) HelloWorldHandler(c *fiber.Ctx) error {
 	resp := fiber.Map{
 		"message": "Hello World",
+	}
+
+	return c.JSON(resp)
+}
+
+func (s *FiberServer) HealthCheckHandler(c *fiber.Ctx) error {
+	resp := fiber.Map{
+		"status": "ok",
 	}
 
 	return c.JSON(resp)
